@@ -58,7 +58,7 @@
 /* For devices larger than 550px */
 @media (min-width: 550px) {
     .container {
-        width: 90%;
+        width: 100%;
     }
 
     .mainContent {
@@ -247,7 +247,7 @@ h6 {
 }
 
 h1 {
-    font-size: 4.0rem;
+    font-size: 2.0rem;
     line-height: 1.2;
     letter-spacing: -.1rem;
 }
@@ -285,7 +285,7 @@ h6 {
 /* Larger than phablet */
 @media (min-width: 550px) {
     h1 {
-        font-size: 5.0rem;
+        font-size: 2.0rem;
     }
 
     h2 {
@@ -507,9 +507,14 @@ ol ul {
 li {
     padding: 8px;
     transition: background-color .3s;
+    cursor: pointer;
 }
 
 li:hover {
+    background-color: #A6BAAB;
+}
+
+.selected {
     background-color: #A6BAAB;
 }
 
