@@ -50,10 +50,6 @@
         <div class="row">
             <h1>Email Helper App</h1>
         </div>
-        <div class="row" style="display: none;">
-            <button class="button-primary" style="visibility: collapse;" type="button" onclick="myFunction()">Copy HTML</button>
-            <button class="button-primary" style="visibility: collapse;" type="button" onclick="copyPlainText()">Copy Plain Text</button>
-        </div>
         <div class="row mainContent">
             <div class="four columns" style="background-color: grey; height: 100%;">
                 <table style="width: 100%;">
@@ -66,8 +62,22 @@
                 </table>
                 <ul id="file-list"></ul>
             </div>
-            <div class="eight columns">
-                <span id="plain-text"></span>
+            <div class="eight columns" style=" height: 100%;">
+                <table style="width: 100%; height: 100%;">
+                    <tbody>
+                        <tr style="height: 100%">
+                            <td style="vertical-align: top;">
+                                <span id="plain-text"></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 4px; width: 50%"><button class="button-primary wideButton" type="button" onclick="copyHtml()">Copy HTML</button></td>
+                            <td style="padding: 4px;  width: 50%"><button class="button-primary wideButton" type="button" onclick="copyPlainText()">Copy Plain Text</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="mainContent" style="background-color: red;">
+                </div>
             </div>
         </div>
     </div>

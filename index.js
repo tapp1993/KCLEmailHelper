@@ -103,7 +103,7 @@ copyHtml = (f) => {
 loadPlainText = (f) => {
     readText(f).then( t => {
         plainText = createPlainText(t)
-        plainText = plainText.replace(/\r\n/g, "<br />")
+        plainText = plainText.replace(/\n/g, "<br />")
         document.getElementById("plain-text").innerHTML = plainText
     }) 
 }

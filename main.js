@@ -1,18 +1,20 @@
+const { Menu } = require("electron");
 const electron = require("electron");
 const app = electron.app;
 const BrowserWindow = electron.BrowserWindow;
 let win;
 
 app.on('ready', () => {
-    win = new BrowserWindow({
-      width: 1200,
+  Menu.setApplicationMenu(false);
+  win = new BrowserWindow({
+      width: 1400,
       height: 800,
       webPreferences: {
         nodeIntegration: true
       }
     })
 
-    win.setAutoHideMenuBar(true);
+    win.maximize();
     win.webContents.openDevTools();
     win.loadFile("index.html");
 
