@@ -1,6 +1,5 @@
 {
   "name": "email-helper",
-  "productName": "email-helper",
   "version": "1.0.0",
   "description": "HTML 2 Plain Text - Plus other helpers",
   "main": "main.js",
