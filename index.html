@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Test project</title>
+    <script src="helpers/buttons.js"></script>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        li table {
+            margin: 0px;
+        }
+
+        .liButton {
+            display: none;
+            margin: 0px;
+        }
+
+        .wideButton {
+            width: 100%;
+            margin: 0px;
+        }
+
+        .liWrapper:hover .liButton {
+            display: inline-block;
+        }
+
+        .noSelect {
+            -webkit-touch-callout: none;
+            /* iOS Safari */
+            -webkit-user-select: none;
+            /* Safari */
+            -khtml-user-select: none;
+            /* Konqueror HTML */
+            -moz-user-select: none;
+            /* Firefox */
+            -ms-user-select: none;
+            /* Internet Explorer/Edge */
+            user-select: none;
+            /* Non-prefixed version, currently supported by Chrome and Opera */
+        }
+
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <h1>Email Helper App</h1>
+        </div>
+        <div class="row" style="display: none;">
+            <button class="button-primary" style="visibility: collapse;" type="button" onclick="myFunction()">Copy HTML</button>
+            <button class="button-primary" style="visibility: collapse;" type="button" onclick="copyPlainText()">Copy Plain Text</button>
+        </div>
+        <div class="row mainContent">
+            <div class="four columns" style="background-color: grey; height: 100%;">
+                <table style="width: 100%;">
+                    <tbody>
+                        <tr>
+                            <td style="padding: 4px; width: 50%"><button class="button-primary wideButton" type="button" onclick="copySubjects()">Copy Subjects</button></td>
+                            <td style="padding: 4px;  width: 50%"><button class="button-primary wideButton" type="button" onclick="copyNames()">Copy Names</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <ul id="file-list"></ul>
+            </div>
+            <div class="eight columns">
+                <span id="plain-text"></span>
+            </div>
+        </div>
+    </div>
+    <script src="index.js"></script>
+</body>
+
+</html>
