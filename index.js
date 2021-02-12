@@ -35,9 +35,14 @@ document.addEventListener('drop', (event) => {
     
     for (let i = 0; i < fileList.length; i++) {
         const f = fileList[i];
+        //Check file is HTML
         if (f.name.includes(".html")) {
-            fileArray.push(f)
-            ul.appendChild(createListItem(f, i))
+            //Check file doesn't already exist in the list
+            if (!fileArray.find( ({name}) => name === f.name)) {
+                fileArray.push(f)
+                ul.appendChild(createListItem(f, i))
+                //Add file to the list
+            }           
         }
         else { alert(`${f.name} is not an HTML file`) }   
     }
@@ -116,8 +121,10 @@ createListItem = (file, index) => {
     let tbody = document.createElement("tbody")
     let tr = document.createElement("tr")
     tr.style.height = '72px'
+    tr.style.maxHeight = '72px'
     let td0 = document.createElement("td")
     td0.classList.add('noSelect')
+    td0.style.display = 'contents'
     td0.innerHTML = `${file.name.replace('.html','')}`
     let td1 = document.createElement("td")
     let btn = document.createElement("button")
