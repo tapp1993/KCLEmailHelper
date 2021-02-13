@@ -1,0 +1,68 @@
+Arguments: 
+  C:\Program Files\nodejs\node.exe C:\Users\tppet\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js release --publish never
+
+PATH: 
+  C:\Python39\Scripts\;C:\Python39\;C:\Program Files (x86)\Common Files\Intel\Shared Libraries\redist\intel64\compiler;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files (x86)\Calibre2\;C:\Program Files\dotnet\;C:\Program Files (x86)\Brackets\command;C:\Program Files\nodejs\;C:\ProgramData\chocolatey\bin;C:\Program Files\Git\cmd;C:\Users\tppet\AppData\Local\Microsoft\WindowsApps;C:\Users\tppet\.dotnet\tools;C:\Users\tppet\AppData\Roaming\npm;C:\Users\tppet\AppData\Local\Programs\Microsoft VS Code\bin;
+
+Yarn version: 
+  1.22.10
+
+Node version: 
+  14.15.4
+
+Platform: 
+  win32 x64
+
+Trace: 
+  SyntaxError: C:\Users\tppet\Documents\Work\Email Helper\package.json: Unexpected end of JSON input
+      at JSON.parse (<anonymous>)
+      at C:\Users\tppet\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:1625:59
+      at Generator.next (<anonymous>)
+      at step (C:\Users\tppet\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:310:30)
+      at C:\Users\tppet\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:321:13
+
+npm manifest: 
+  {
+    "name": "email-helper",
+    "version": "1.0.2",
+    "description": "KCL Email Helper App",
+    "main": "main.js",
+    "devDependencies": {
+      "electron": "^11.2.3"
+    },
+    "repository": {
+      "type": "git",
+      "url": "https://github.com/tapp1993/KCLEmailHelper"
+    },
+    "scripts": {
+      "start": "electron .",
+      "test": "echo \"Error: no test specified\" && exit 1",
+      "build": "electron-builder build --mac --win --publish never",
+      "deploy": "electron-builder build --mac --win --publish always"
+    },
+    "build": {
+      "appId": "com.example.kclemailhelper",
+      "publish": "github",
+      "dmg": {
+        "contents": [
+          {
+            "x": 110,
+            "y": 150
+          },
+          {
+            "x": 240,
+            "y": 150,
+            "type": "link",
+            "path": "/Applications"
+          }
+        ]
+      },
+    "author": "Tej",
+    "license": "ISC"
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
