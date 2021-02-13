@@ -1,9 +1,9 @@
 const { clipboard } = require("electron");
-const { ipcRenderer } = require('electron');
-const notification = document.getElementById('notification');
-const message = document.getElementById('notificationMessage');
-const restartButton = document.getElementById('restartButton');
-const dismissButton = document.getElementById('dismissButton');
+const { ipcRenderer } = require("electron");
+const notification = document.getElementById("notification");
+const message = document.getElementById("notificationMessage");
+const restartButton = document.getElementById("restartButton");
+const dismissButton = document.getElementById("dismissButton");
 
 var fileList;
 var fileArray = [];
@@ -13,28 +13,28 @@ var plainText = "";
 var formattedPlainText = "";
 
 //#region Handle Updates
-ipcRenderer.on('update_available', () => {
-  ipcRenderer.removeAllListeners('update_available')
-  message.innerText = "There's an update available. Downloading now..."
-  restartButton.classList.add('hidden')
-  notification.classList.remove('hidden')
-  dismissButton.classList.remove('hidden')
-})
+ipcRenderer.on("update_available", () => {
+  ipcRenderer.removeAllListeners("update_available");
+  message.innerText = "There's an update available. Downloading now...";
+  restartButton.classList.add("hidden");
+  notification.classList.remove("hidden");
+  dismissButton.classList.remove("hidden");
+});
 
-ipcRenderer.on('update_downloaded', () => {
-  ipcRenderer.removeAllListeners('update_downloaded')
-  message.innerText = "Update downloaded. Restart the app to install."
-  dismissButton.classList.add('hidden')
-  notification.classList.remove('hidden')
-  restartButton.classList.remove('hidden')
-})
+ipcRenderer.on("update_downloaded", () => {
+  ipcRenderer.removeAllListeners("update_downloaded");
+  message.innerText = "Update downloaded. Restart the app to install.";
+  dismissButton.classList.add("hidden");
+  notification.classList.remove("hidden");
+  restartButton.classList.remove("hidden");
+});
 //#endregion
 
 //#region Event Listeners
 document.getElementById("file-list").addEventListener("click", function (e) {
-    e.preventDefault();
-    e.stopPropagation();
-    if (e.target) {
+  e.preventDefault();
+  e.stopPropagation();
+  if (e.target) {
     let li = e.target.closest("li");
     let list = li.parentNode;
     let i = getClickedIndex(list, li);
@@ -47,9 +47,9 @@ document.getElementById("file-list").addEventListener("click", function (e) {
 });
 
 document.getElementById("file-list").addEventListener("auxclick", function (e) {
-    e.preventDefault();
-    e.stopPropagation();
-    if (e.target) {
+  e.preventDefault();
+  e.stopPropagation();
+  if (e.target) {
     let li = e.target.closest("li");
     let list = li.parentNode;
     let i = getClickedIndex(list, li);
@@ -147,6 +147,13 @@ copyHtml = () => {
   copyText(fileHtml);
   showPopup("Copied HTML");
 };
+
+copyHtmlShortcut = (f) => {
+  readText(f).then((t) => {
+    copyText(t);
+    showPopup("Copied HTML");
+  });
+};
 //#endregion
 
 loadPlainText = (f) => {
@@ -165,11 +172,11 @@ loadHtml = (f) => {
 
 //#region Helpers
 showPopup = (t) => {
-  message.innerText = t
-  restartButton.classList.add('hidden')
-  notification.classList.remove('hidden')
-  dismissButton.classList.remove('hidden')
-}
+  message.innerText = t;
+  restartButton.classList.add("hidden");
+  notification.classList.remove("hidden");
+  dismissButton.classList.remove("hidden");
+};
 
 toggleSelection = (li, list) => {
   let selected = list.querySelectorAll(".selected");
@@ -181,37 +188,26 @@ toggleSelection = (li, list) => {
 
 createListItem = (file) => {
   var li = document.createElement("LI");
-  //#region With button
-  // let tbl = document.createElement("table")
-  // let tbody = document.createElement("tbody")
-  // let tr = document.createElement("tr")
-  // tr.style.height = '72px'
-  // tr.style.maxHeight = '72px'
-  // let td0 = document.createElement("td")
-  // td0.classList.add('noSelect')
-  // td0.style.display = 'contents'
-  // td0.innerHTML = `${file.name.replace('.html','')}`
-  // let td1 = document.createElement("td")
-  // let btn = document.createElement("button")
-  // btn.className = 'liButton'
-  // btn.innerHTML = 'Copy HTML'
-  // btn.addEventListener('click', (e) => {
-  //     e.stopPropagation()
-  //     let li = e.target.closest('li')
-  //     let list = li.parentNode
-  //     let i = getClickedIndex(list, li)
-  //     var f = fileArray[i]
-  //     copyHtml(f)
-  // });
-  //td1.appendChild(btn)
-  // tr.appendChild(td0)
-  //tr.appendChild(td1)
-  // tbody.appendChild(tr)
-  // tbl.appendChild(tbody)
-  // li.appendChild(tbl)
-  //#endregion
-  li.innerHTML = `${file.name.replace(".html", "")}`;
-  li.className = "liWrapper noSelect";
+  let div = document.createElement("div");
+  div.classList.add("liParent");
+  let p = document.createElement("p");
+  p.classList.add("liWrapper", "noSelect");
+  p.innerHTML = file.name.replace(".html", "");
+  let btn = document.createElement("button");
+  btn.classList.add("button-primary", "liButton");
+  btn.innerHTML = "Copy HTML";
+  btn.addEventListener("click", (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    let li = e.target.closest("li");
+    let list = li.parentNode;
+    let i = getClickedIndex(list, li);
+    var f = fileArray[i];
+    copyHtmlShortcut(f);
+  });
+  div.appendChild(p);
+  div.appendChild(btn);
+  li.appendChild(div);
   return li;
 };
 copyText = (t) => {

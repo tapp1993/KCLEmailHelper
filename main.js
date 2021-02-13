@@ -16,7 +16,7 @@ app.on('ready', () => {
     })
 
     win.maximize();
-    //win.webContents.openDevTools();
+    win.webContents.openDevTools();
     win.loadFile("index.html");
     win.once('ready-to-show', () => {
       // autoUpdater.checkForUpdates();

@@ -15,7 +15,9 @@
 
         .liButton {
             display: none;
-            margin: 0px;
+            min-width: 80px;
+            grid-column: 2; 
+            margin: auto;
         }
 
         .liWrapper {
@@ -25,16 +27,19 @@
             font-family: "Raleway", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
             font-weight: 600;
             color: #eee;
+            margin-bottom: 0px;
+            grid-column: 1 / 2;
+        }
+
+        .liParent:hover .liButton,
+        .liParent:active .liButton {
+            display: block;
         }
 
         .wideButton {
             width: 100%;
             margin: 0px;
             padding: 0px 12px;
-        }
-
-        .liWrapper:hover .liButton {
-            display: inline-block;
         }
 
         .noSelect {
@@ -68,6 +73,12 @@
 
         .hidden {
             display: none;
+        }
+
+        .liParent {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            align-content: center;
         }
 
     </style>

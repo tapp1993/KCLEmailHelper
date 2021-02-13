@@ -15,8 +15,8 @@
     "start": "electron .",
     "test": "echo success",
     "release": "electron-builder",
-    "build": "electron-builder build --win --publish never",
-    "deploy": "electron-builder build --win --publish always"
+    "build": "electron-builder build --win --mac --publish never",
+    "deploy": "electron-builder build --win --mac --publish always"
   },
   "build": {
     "appId": "com.example.kclemailhelper",
