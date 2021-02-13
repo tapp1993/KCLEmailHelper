@@ -12,7 +12,7 @@
   },
   "scripts": {
     "start": "electron .",
-    "test": "SUCCESS",
+    "test": "echo SUCCESS",
     "release": "electron-builder",
     "build": "electron-builder build --mac --win --publish never",
     "deploy": "electron-builder build --mac --win --publish always"
