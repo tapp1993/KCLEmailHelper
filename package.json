@@ -1,6 +1,6 @@
 {
   "name": "email-helper",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "KCL Email Helper App",
   "main": "main.js",
   "devDependencies": {

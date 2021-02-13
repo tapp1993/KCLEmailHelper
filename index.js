@@ -1,7 +1,7 @@
 const { clipboard } = require("electron");
 const { ipcRenderer } = require('electron');
 const notification = document.getElementById('notification');
-const message = document.getElementById('message');
+const message = document.getElementById('notificationMessage');
 const restartButton = document.getElementById('restartButton');
 const dismissButton = document.getElementById('dismissButton');
 
@@ -140,12 +140,12 @@ copyNames = () => {
 
 copyPlainText = () => {
   copyText(plainText);
-  alert("Copied plain text");
+  showPopup("Copied plain text");
 };
 
 copyHtml = () => {
   copyText(fileHtml);
-  alert("Copied HTML");
+  showPopup("Copied HTML");
 };
 //#endregion
 
@@ -164,6 +164,12 @@ loadHtml = (f) => {
 };
 
 //#region Helpers
+showPopup = (t) => {
+  message.innerText = t
+  restartButton.classList.add('hidden')
+  notification.classList.remove('hidden')
+  dismissButton.classList.remove('hidden')
+}
 
 toggleSelection = (li, list) => {
   let selected = list.querySelectorAll(".selected");
