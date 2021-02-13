@@ -1,10 +1,11 @@
 {
   "name": "email-helper",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "description": "KCL Email Helper App",
   "main": "main.js",
   "devDependencies": {
-    "electron": "^11.2.3"
+    "electron": "^11.2.3",
+    "electron-builder": "^22.9.1"
   },
   "repository": {
     "type": "git",
@@ -12,10 +13,28 @@
   },
   "scripts": {
     "start": "electron .",
-    "test": "echo SUCCESS",
+    "test": "echo success",
     "release": "electron-builder",
-    "build": "electron-builder build --mac --win --publish never",
-    "deploy": "electron-builder build --mac --win --publish always"
+    "build": "electron-builder build --win --publish never",
+    "deploy": "electron-builder build --win --publish always"
+  },
+  "build": {
+    "appId": "com.example.kclemailhelper",
+    "publish": "github",
+    "dmg": {
+      "contents": [
+        {
+          "x": 110,
+          "y": 150
+        },
+        {
+          "x": 240,
+          "y": 150,
+          "type": "link",
+          "path": "/Applications"
+        }
+      ]
+    }
   },
   "author": "Tej",
   "license": "ISC"
