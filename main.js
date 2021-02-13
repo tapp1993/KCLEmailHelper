@@ -3,7 +3,7 @@ const electron = require("electron");
 const app = electron.app;
 const BrowserWindow = electron.BrowserWindow;
 let win;
-const { autoUpdater } = require('electron-updater');
+const { autoUpdater } = require('electron');
 
 app.on('ready', () => {
   Menu.setApplicationMenu(false);
