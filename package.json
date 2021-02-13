@@ -6,9 +6,15 @@
   "devDependencies": {
     "electron": "^11.2.3"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tapp1993/KCLEmailHelper"
+  },
   "scripts": {
     "start": "electron .",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "electron-builder build --mac --win --publish never",
+    "deploy": "electron-builder build --mac --win --publish always"
   },
   "author": "Tej",
   "license": "ISC"
