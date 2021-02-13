@@ -19,7 +19,7 @@ app.on('ready', () => {
     // win.webContents.openDevTools();
     win.loadFile("index.html");
     win.once('ready-to-show', () => {
-      autoUpdater.checkForUpdatesAndNotify();
+      autoUpdater.checkForUpdates()
     });
     win.on('closed', function() {
         win = null;
