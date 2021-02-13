@@ -1,10 +1,34 @@
 const { clipboard } = require("electron");
+const { ipcRenderer } = require('electron');
+const notification = document.getElementById('notification');
+const message = document.getElementById('message');
+const restartButton = document.getElementById('restartButton');
+const dismissButton = document.getElementById('dismissButton');
+
 var fileList;
 var fileArray = [];
 
 var fileHtml = "";
 var plainText = "";
 var formattedPlainText = "";
+
+//#region Handle Updates
+ipcRenderer.on('update_available', () => {
+  ipcRenderer.removeAllListeners('update_available')
+  message.innerText = "There's an update available. Downloading now..."
+  restartButton.classList.add('hidden')
+  notification.classList.remove('hidden')
+  dismissButton.classList.remove('hidden')
+})
+
+ipcRenderer.on('update_downloaded', () => {
+  ipcRenderer.removeAllListeners('update_downloaded')
+  message.innerText = "Update downloaded. Restart the app to install."
+  dismissButton.classList.add('hidden')
+  notification.classList.remove('hidden')
+  restartButton.classList.remove('hidden')
+})
+//#endregion
 
 //#region Event Listeners
 document.getElementById("file-list").addEventListener("click", function (e) {
@@ -73,6 +97,7 @@ document.addEventListener("dragleave", (event) => {
 //#endregion
 
 //#region Event Handlers
+
 copySubjects = async () => {
   if (fileArray.length > 0) {
     var subjects = "";
