@@ -38,6 +38,7 @@
     box-sizing: border-box;
     display: flex;
     flex-flow: column;
+    background-color: #333;
 }
 
 .column,
@@ -349,7 +350,7 @@ input[type="button"] {
     border: 1px solid #bbb;
     cursor: pointer;
     box-sizing: border-box;
-    transition-duration: 0.3s;
+    transition-duration: 0.2s;
 }
 
 .button:hover,
@@ -373,8 +374,8 @@ input[type="submit"].button-primary,
 input[type="reset"].button-primary,
 input[type="button"].button-primary {
     color: #FFF;
-    background-color: #33C3F0;
-    border-color: #33C3F0;
+    background-color: #616D64;
+    border-color: #616D64;
 }
 
 .button.button-primary:hover,
@@ -388,8 +389,8 @@ input[type="submit"].button-primary:focus,
 input[type="reset"].button-primary:focus,
 input[type="button"].button-primary:focus {
     color: #FFF;
-    background-color: #1EAEDB;
-    border-color: #1EAEDB;
+    background-color: #A6BAAB;
+    border-color: #616D64;
 }
 
 .button.button-primary:active,
@@ -398,8 +399,8 @@ input[type="submit"].button-primary:active,
 input[type="reset"].button-primary:active,
 input[type="button"].button-primary:active {
     color: #FFF;
-    background-color: green;
-    border-color: #1EAEDB;
+    background-color: #78867C;
+    border-color: #616D64;
 }
 
 /* Forms
@@ -506,12 +507,16 @@ ol ul {
 
 li {
     padding: 8px;
-    transition: background-color .3s;
+    transition: background-color .2s;
     cursor: pointer;
 }
 
 li:hover {
     background-color: #A6BAAB;
+}
+
+li:active {
+    background-color: #78867C;
 }
 
 .selected {
@@ -576,12 +581,11 @@ pre,
 blockquote,
 dl,
 figure,
-table,
 p,
 ul,
 ol,
 form {
-    margin-bottom: 2.5rem;
+    margin-bottom: 16px;
 }
 
 
@@ -653,3 +657,14 @@ hr {
 
 /* Larger than Desktop HD */
 @media (min-width: 1200px) {}
+
+#plain-text {
+    color: white;
+}
+
+#notificationMessage {
+    padding: 0px;
+    margin: 0px;
+}
+
+

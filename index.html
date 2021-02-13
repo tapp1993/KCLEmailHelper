@@ -22,6 +22,9 @@
             padding: 16px 8px;
             overflow: hidden;
             white-space: nowrap;
+            font-family: "Raleway", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+            font-weight: 600;
+            color: #eee;
         }
 
         .wideButton {
@@ -49,6 +52,24 @@
             /* Non-prefixed version, currently supported by Chrome and Opera */
         }
 
+        #notification {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            padding: 16px 32px;
+            background-color: white;
+            box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.2);
+            font-weight: bold;
+            color: #555;
+            min-width: 200px;
+            max-width: 300px;
+        }
+
+
+        .hidden {
+            display: none;
+        }
+
     </style>
 </head>
 
@@ -60,7 +81,7 @@
         </div>
 -->
         <div class="row mainContent">
-            <div class="three columns" style="background-color: grey; height: 100%;">
+            <div class="three columns" style="background-color: #555; height: 100%;">
                 <table style="width: 100%;">
                     <tbody>
                         <tr>
@@ -69,15 +90,18 @@
                         </tr>
                     </tbody>
                 </table>
-                <ul id="file-list"></ul>
+                <ul id="file-list">
+                    <li class="liWrapper">Test 1</li>
+                    <li class="liWrapper">Test 2</li>
+                </ul>
             </div>
             <div class="nine columns" style=" height: 100%;">
-                <table style="width: 100%; height: 100%; max-height: 100%;">
+                <table style="width: 100%; height: 100%; max-height: 100%; padding-bottom: 0px">
                     <tbody>
                         <tr style="height: 100%">
                             <td style="vertical-align: top;" colspan="2">
                                 <div style="overflow: auto; height: 100%;">
-                                    <span id="plain-text"></span>
+                                    <span id="plain-text" style="font-size: 16px; font-weight: normal;">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sed, id error voluptas reprehenderit maiores vero ex fuga, tempore aspernatur quam nostrum voluptatibus cum nisi explicabo nihil vel perspiciatis voluptates? Iusto pariatur a repellendus modi dolorem consectetur, illo quod vero nemo eaque fuga, earum voluptas assumenda ipsam ullam, inventore tempora! Ab ex doloribus quod reiciendis sed fuga amet esse ipsam modi, deserunt, possimus, nostrum nobis quia blanditiis nesciunt ut corrupti perspiciatis illo voluptatibus autem libero repellat! Eligendi amet quasi, voluptas commodi illo nostrum labore! Corrupti nesciunt eaque repudiandae in quod, id dignissimos assumenda temporibus accusantium iure soluta earum sit aut beatae!</span>
                                 </div>
                             </td>
                         </tr>
@@ -91,6 +115,33 @@
                 </div>
             </div>
         </div>
+    </div>
+    <div id="notification" class="">
+        <table style="width: 100%">
+            <tr>
+                <td>
+                    <p id="notificationMessage">
+                        HTML Copied!
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td style="text-align: center">
+                    <button class="button-primary wideButton" id="dismissButton" style="margin: 0px" onclick="dismissPopup()">Dismiss</button>
+                    <button class="button-primary wideButton hidden" id="restartButton" style="margin: 0px" onclick="restartApp()">Restart</button>
+                </td>
+            </tr>
+        </table>
+        <script>
+            function dismissPopup() {
+                notification.classList.add('hidden');
+            }
+
+            function restartApp() {
+                ipcRenderer.send('restart_app');
+            }
+
+        </script>
     </div>
     <script src="index.js"></script>
 </body>
