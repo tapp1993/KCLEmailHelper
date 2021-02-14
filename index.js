@@ -4,9 +4,14 @@ const notification = document.getElementById("notification");
 const message = document.getElementById("notificationMessage");
 const restartButton = document.getElementById("restartButton");
 const dismissButton = document.getElementById("dismissButton");
+const copySubjectsButton = document.getElementById("copySubjectsButton");
+const copyNamesButton = document.getElementById("copyNamesButton");
+const copyHtmlButton = document.getElementById("copyHtmlButton");
+const copyPlainTextButton = document.getElementById("copyPlainTextButton");
 
 var fileList;
 var fileArray = [];
+var currentIndex;
 
 var fileHtml = "";
 var plainText = "";
@@ -37,12 +42,14 @@ document.getElementById("file-list").addEventListener("click", function (e) {
   if (e.target) {
     let li = e.target.closest("li");
     let list = li.parentNode;
-    let i = getClickedIndex(list, li);
-    var f = fileArray[i];
+    currentIndex = getClickedIndex(list, li);
+    var f = fileArray[currentIndex];
     loadPlainText(f);
     loadHtml(f);
+    copyHtmlButton.removeAttribute("disabled");
+    copyPlainTextButton.removeAttribute("disabled");
     toggleSelection(li, list);
-    console.log(f.name + " was clicked. Index: " + i);
+    console.log(f.name + " was clicked. Index: " + currentIndex);
   }
 });
 
@@ -56,7 +63,17 @@ document.getElementById("file-list").addEventListener("auxclick", function (e) {
     var f = fileArray[i];
     fileArray.splice(i, 1);
     list.removeChild(li);
+    if (i == currentIndex) {
+      currentIndex = null;
+      clearText();
+      copyHtmlButton.setAttribute("disabled", true);
+      copyPlainTextButton.setAttribute("disabled", true);
+    }
     console.log(f.name + " was deleted.");
+    if (fileArray.length < 1) {
+      copyNames.setAttribute("disabled", true);
+      copySubjects.setAttribute("disabled", true);
+    }
   }
 });
 
@@ -65,20 +82,23 @@ document.addEventListener("drop", (event) => {
   event.stopPropagation();
   fileList = event.dataTransfer.files;
   var ul = document.getElementById("file-list");
-
-  for (let i = 0; i < fileList.length; i++) {
-    const f = fileList[i];
-    //Check file is HTML
-    if (f.name.includes(".html")) {
-      //Check file doesn't already exist in the list
-      if (!fileArray.find(({ name }) => name === f.name)) {
-        fileArray.push(f);
-        ul.appendChild(createListItem(f));
-        //Add file to the list
+  if (fileList.length > 0) {
+    for (let i = 0; i < fileList.length; i++) {
+      const f = fileList[i];
+      //Check file is HTML
+      if (f.name.includes(".html")) {
+        //Check file doesn't already exist in the list
+        if (!fileArray.find(({ name }) => name === f.name)) {
+          fileArray.push(f);
+          ul.appendChild(createListItem(f));
+          //Add file to the list
+        }
+      } else {
+        alert(`${f.name} is not an HTML file`);
       }
-    } else {
-      alert(`${f.name} is not an HTML file`);
     }
+    copyNamesButton.removeAttribute("disabled");
+    copySubjectsButton.removeAttribute("disabled");
   }
 });
 
@@ -171,6 +191,12 @@ loadHtml = (f) => {
 };
 
 //#region Helpers
+clearText = () => {
+  fileHtml = "";
+  plainText = "";
+  document.getElementById("plain-text").innerHTML = plainText;
+}
+
 showPopup = (t) => {
   message.innerText = t;
   restartButton.classList.add("hidden");
@@ -195,7 +221,7 @@ createListItem = (file) => {
   p.innerHTML = file.name.replace(".html", "");
   let btn = document.createElement("button");
   btn.classList.add("button-primary", "liButton");
-  btn.innerHTML = "Copy HTML";
+  btn.innerHTML = "📄";
   btn.addEventListener("click", (e) => {
     e.preventDefault();
     e.stopPropagation();
