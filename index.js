@@ -164,7 +164,7 @@ function copyNames() {
 }
 
 function previewHtml() {
-  let win = new BrowserWindow({ width: 650, height: 1000, show: false });
+  let win = new BrowserWindow({ width: 650, height: 1000, show: false, autoHideMenuBar: true, resizable: false, title: `${fileArray[currentIndex].name}` });
   win.loadURL(`file://${fileArray[currentIndex].path}`);
   win.once("ready-to-show", () => {
     win.show();

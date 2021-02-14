@@ -68,10 +68,10 @@
         grid-template-columns: auto 1fr;
     }
 
-    .column,
+    /* .column,
     .columns {
-        /* margin-left: 4%; */
-    }
+        margin-left: 4%;
+    } */
 
     .column:first-child,
     .columns:first-child {
