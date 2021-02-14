@@ -15,17 +15,24 @@
 
         .liButton {
             display: none;
-            min-width: 80px;
-            grid-column: 2; 
+            padding: 0px 8px !important;
+            grid-column: 2;
             margin: auto;
+            font-size: 1.5em;
+        }
+
+        .smallButton {
+            padding: 0px 12px !important;
+            margin: 0px;
+            width: 100%;
         }
 
         .liWrapper {
-            padding: 16px 8px;
+            padding: 8px 4px;
             overflow: hidden;
             white-space: nowrap;
             font-family: "Raleway", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
-            font-weight: 600;
+            font-weight: normal;
             color: #eee;
             margin-bottom: 0px;
             grid-column: 1 / 2;
@@ -36,10 +43,24 @@
             display: block;
         }
 
+        .selected .liParent .liWrapper {
+            font-weight: bold;
+        }
+
         .wideButton {
             width: 100%;
             margin: 0px;
             padding: 0px 12px;
+        }
+
+        .wideButton:disabled,
+        .wideButton:disabled:hover,
+        .smallButton:disabled,
+        .smallButton:disabled:hover {
+            background-color: #444;
+            border-color: #444;
+            color: #666;
+            cursor: default;
         }
 
         .noSelect {
@@ -92,35 +113,34 @@
         </div>
 -->
         <div class="row mainContent">
-            <div class="three columns" style="background-color: #555; height: 100%;">
+            <div class="three columns" style="background-color: #555; height: 100%; width: 350px;">
                 <table style="width: 100%;">
                     <tbody>
                         <tr>
-                            <td style="padding: 4px; width: 50%"><button class="button-primary wideButton" type="button" onclick="copySubjects()">Copy Subjects</button></td>
-                            <td style="padding: 4px;  width: 50%"><button class="button-primary wideButton" type="button" onclick="copyNames()">Copy Names</button></td>
+                            <td style="padding: 4px; width: 50%"><button id="copySubjectsButton" disabled class="button-primary wideButton" type="button" onclick="copySubjects()">Copy Subjects</button></td>
+                            <td style="padding: 4px;  width: 50%"><button id="copyNamesButton" disabled class="button-primary wideButton" type="button" onclick="copyNames()">Copy Names</button></td>
                         </tr>
                     </tbody>
                 </table>
                 <ul id="file-list" style="margin-top: 16px;"></ul>
             </div>
-            <div class="nine columns" style=" height: 100%;">
+            <div class="nine columns" style=" height: 100%; width: 100%;">
                 <table style="width: 100%; height: 100%; max-height: 100%; padding-bottom: 0px">
                     <tbody>
                         <tr style="height: 100%">
-                            <td style="vertical-align: top;" colspan="2">
-                                <div style="overflow: auto; height: 100%;">
+                            <td style="vertical-align: top;" colspan="3">
+                                <div style="overflow: auto; height: 100%; padding: 12px;">
                                     <span id="plain-text" style="font-size: 16px; font-weight: normal;"></span>
                                 </div>
                             </td>
                         </tr>
                         <tr>
-                            <td style="padding: 4px; width: 50%"><button class="button-primary wideButton" type="button" onclick="copyHtml()">Copy HTML</button></td>
-                            <td style="padding: 4px;  width: 50%"><button class="button-primary wideButton" type="button" onclick="copyPlainText()">Copy Plain Text</button></td>
+                            <td style="padding: 4px; width: 50%"><button id="copyHtmlButton" disabled class="button-primary wideButton" type="button" onclick="copyHtml()">Copy HTML</button></td>
+                            <td style="padding: 4px;  width: 50%"><button id="copyPlainTextButton" disabled class="button-primary wideButton" type="button" onclick="copyPlainText()">Copy Plain Text</button></td>
+                            <td style="padding: 4px;"><button id="previewButton" disabled class="button-primary smallButton" type="button" onclick="previewHtml()">Preview</button></td>
                         </tr>
                     </tbody>
                 </table>
-                <div class="mainContent" style="background-color: red;">
-                </div>
             </div>
         </div>
     </div>

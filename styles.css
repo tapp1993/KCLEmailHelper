@@ -64,12 +64,14 @@
 
     .mainContent {
         flex: 1 1;
+        display: grid;
+        grid-template-columns: auto 1fr;
     }
 
-    .column,
+    /* .column,
     .columns {
         margin-left: 4%;
-    }
+    } */
 
     .column:first-child,
     .columns:first-child {
@@ -523,6 +525,10 @@ li:active {
     background-color: #A6BAAB;
 }
 
+.selected ~ p{
+    font-weight: bold;
+}
+
 
 /* Code
   –––––––––––––––––––––––––––––––––––––––––––––––––– */
@@ -627,7 +633,7 @@ hr {
 .container:after,
 .row:after,
 .u-cf {
-    content: "";
+    /* content: ""; */
     display: table;
     clear: both;
 }
