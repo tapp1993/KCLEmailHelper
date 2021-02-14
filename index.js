@@ -216,8 +216,11 @@ let clearText = () => {
 let showPopup = (t) => {
   message.innerText = t;
   restartButton.classList.add("hidden");
-  notification.classList.remove("hidden");
   dismissButton.classList.remove("hidden");
+  notification.classList.remove("hidden");
+  setTimeout(() => {
+    notification.classList.add("hidden");
+  }, 1500);
 };
 
 let toggleSelection = (li, list) => {
