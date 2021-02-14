@@ -1,3 +1,4 @@
+const { BrowserWindow } = require("electron").remote;
 const { clipboard } = require("electron");
 const { ipcRenderer } = require("electron");
 const notification = document.getElementById("notification");
@@ -8,6 +9,7 @@ const copySubjectsButton = document.getElementById("copySubjectsButton");
 const copyNamesButton = document.getElementById("copyNamesButton");
 const copyHtmlButton = document.getElementById("copyHtmlButton");
 const copyPlainTextButton = document.getElementById("copyPlainTextButton");
+const previewButton = document.getElementById("previewButton");
 
 var fileList;
 var fileArray = [];
@@ -48,6 +50,8 @@ document.getElementById("file-list").addEventListener("click", function (e) {
     loadHtml(f);
     copyHtmlButton.removeAttribute("disabled");
     copyPlainTextButton.removeAttribute("disabled");
+    previewButton.removeAttribute("disabled");
+
     toggleSelection(li, list);
     console.log(f.name + " was clicked. Index: " + currentIndex);
   }
@@ -68,6 +72,7 @@ document.getElementById("file-list").addEventListener("auxclick", function (e) {
       clearText();
       copyHtmlButton.setAttribute("disabled", true);
       copyPlainTextButton.setAttribute("disabled", true);
+      previewButton.setAttribute("disabled", true);
     }
     console.log(f.name + " was deleted.");
     if (fileArray.length < 1) {
@@ -158,6 +163,14 @@ copyNames = () => {
   });
 };
 
+previewHtml = () => {
+  let win = new BrowserWindow({ width: 650, height: 1000, show: false });
+  win.loadURL(`file://${fileArray[currentIndex].path}`);
+  win.once("ready-to-show", () => {
+    win.show()
+  });
+};
+
 copyPlainText = () => {
   copyText(plainText);
   showPopup("Copied plain text");
@@ -195,7 +208,7 @@ clearText = () => {
   fileHtml = "";
   plainText = "";
   document.getElementById("plain-text").innerHTML = plainText;
-}
+};
 
 showPopup = (t) => {
   message.innerText = t;
