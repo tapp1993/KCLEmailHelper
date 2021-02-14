@@ -102,6 +102,44 @@
             align-content: center;
         }
 
+
+        #overlayContainer {
+            position: fixed;
+            height: 100%;
+            width: 100%;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.1);
+            color: #fff;
+        }
+
+        #overlay {
+            position: fixed;
+            height: 100%;
+            width: 100%;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.1);
+            color: #fff;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+
+
+        #overlayContents {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            font-size: 50px;
+            transform: translate(-50%, -50%);
+            -ms-transform: translate(-50%, -50%);
+            margin: 0px;
+        }
+
     </style>
 </head>
 
@@ -113,6 +151,11 @@
         </div>
 -->
         <div class="row mainContent">
+            <div id="overlayContainer">
+                <div id="overlay">
+                    <p id="overlayContents">Drop HTML files here</p>
+                </div>
+            </div>
             <div class="three columns" style="background-color: #555; height: 100%; width: 350px;">
                 <table style="width: 100%;">
                     <tbody>

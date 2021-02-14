@@ -10,6 +10,7 @@ const copyNamesButton = document.getElementById("copyNamesButton");
 const copyHtmlButton = document.getElementById("copyHtmlButton");
 const copyPlainTextButton = document.getElementById("copyPlainTextButton");
 const previewButton = document.getElementById("previewButton");
+const overlay = document.getElementById("overlayContainer");
 
 var fileList
 var fileArray = [];
@@ -76,8 +77,9 @@ document.getElementById("file-list").addEventListener("auxclick", function (e) {
     }
     console.log(f.name + " was deleted.");
     if (fileArray.length < 1) {
-      copyNames.setAttribute("disabled", true);
-      copySubjects.setAttribute("disabled", true);
+      copyNamesButton.setAttribute("disabled", true);
+      copySubjectsButton.setAttribute("disabled", true);
+      overlay.style.display = 'block';
     }
   }
 });
@@ -88,6 +90,7 @@ document.addEventListener("drop", (event) => {
   fileList = event.dataTransfer.files;
   var ul = document.getElementById("file-list");
   if (fileList.length > 0) {
+    overlay.style.display = 'none'
     for (let i = 0; i < fileList.length; i++) {
       const f = fileList[i];
       //Check file is HTML
