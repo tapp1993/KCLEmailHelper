@@ -6,7 +6,8 @@
   "main": "main.js",
   "devDependencies": {
     "electron": "^11.2.3",
-    "electron-builder": "^22.9.1"
+    "electron-builder": "^22.9.1",
+    "eslint": "^7.20.0"
   },
   "repository": {
     "type": "git",

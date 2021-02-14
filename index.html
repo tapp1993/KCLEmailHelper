@@ -24,14 +24,15 @@
         .smallButton {
             padding: 0px 12px !important;
             margin: 0px;
+            width: 100%;
         }
 
         .liWrapper {
-            padding: 16px 8px;
+            padding: 8px 4px;
             overflow: hidden;
             white-space: nowrap;
             font-family: "Raleway", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
-            font-weight: 600;
+            font-weight: normal;
             color: #eee;
             margin-bottom: 0px;
             grid-column: 1 / 2;
@@ -40,6 +41,10 @@
         .liParent:hover .liButton,
         .liParent:active .liButton {
             display: block;
+        }
+
+        .selected .liParent .liWrapper {
+            font-weight: bold;
         }
 
         .wideButton {
@@ -124,7 +129,7 @@
                     <tbody>
                         <tr style="height: 100%">
                             <td style="vertical-align: top;" colspan="3">
-                                <div style="overflow: auto; height: 100%;">
+                                <div style="overflow: auto; height: 100%; padding: 12px;">
                                     <span id="plain-text" style="font-size: 16px; font-weight: normal;"></span>
                                 </div>
                             </td>

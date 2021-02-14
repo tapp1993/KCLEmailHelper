@@ -11,7 +11,7 @@ const copyHtmlButton = document.getElementById("copyHtmlButton");
 const copyPlainTextButton = document.getElementById("copyPlainTextButton");
 const previewButton = document.getElementById("previewButton");
 
-var fileList;
+var fileList
 var fileArray = [];
 var currentIndex;
 
@@ -109,7 +109,7 @@ document.addEventListener("drop", (event) => {
 
 document.addEventListener("dragover", (e) => {
   e.preventDefault();
-  e.stopPropagation();
+  e.stopPropagation()
 });
 
 document.addEventListener("dragenter", (event) => {
@@ -123,7 +123,7 @@ document.addEventListener("dragleave", (event) => {
 
 //#region Event Handlers
 
-copySubjects = async () => {
+async function copySubjects() {
   if (fileArray.length > 0) {
     var subjects = "";
     for (let i = 0; i < fileArray.length; i++) {
@@ -142,9 +142,9 @@ copySubjects = async () => {
   readText(fileArray[0]).then((t) => {
     getSubject(t);
   });
-};
+}
 
-copyNames = () => {
+function copyNames() {
   if (fileArray.length > 0) {
     var names = "";
     for (let i = 0; i < fileArray.length; i++) {
@@ -161,27 +161,27 @@ copyNames = () => {
   readText(fileArray[0]).then((t) => {
     getSubject(t);
   });
-};
+}
 
-previewHtml = () => {
+function previewHtml() {
   let win = new BrowserWindow({ width: 650, height: 1000, show: false });
   win.loadURL(`file://${fileArray[currentIndex].path}`);
   win.once("ready-to-show", () => {
-    win.show()
+    win.show();
   });
-};
+}
 
-copyPlainText = () => {
+function copyPlainText() {
   copyText(plainText);
   showPopup("Copied plain text");
-};
+}
 
-copyHtml = () => {
+function copyHtml() {
   copyText(fileHtml);
   showPopup("Copied HTML");
-};
+}
 
-copyHtmlShortcut = (f) => {
+let copyHtmlShortcut = (f) => {
   readText(f).then((t) => {
     copyText(t);
     showPopup("Copied HTML");
@@ -189,7 +189,7 @@ copyHtmlShortcut = (f) => {
 };
 //#endregion
 
-loadPlainText = (f) => {
+let loadPlainText = (f) => {
   readText(f).then((t) => {
     plainText = createPlainText(t);
     formattedPlainText = plainText.replace(/\n/g, "<br />");
@@ -197,27 +197,27 @@ loadPlainText = (f) => {
   });
 };
 
-loadHtml = (f) => {
+let loadHtml = (f) => {
   readText(f).then((t) => {
     fileHtml = t;
   });
 };
 
 //#region Helpers
-clearText = () => {
+let clearText = () => {
   fileHtml = "";
   plainText = "";
   document.getElementById("plain-text").innerHTML = plainText;
 };
 
-showPopup = (t) => {
+let showPopup = (t) => {
   message.innerText = t;
   restartButton.classList.add("hidden");
   notification.classList.remove("hidden");
   dismissButton.classList.remove("hidden");
 };
 
-toggleSelection = (li, list) => {
+let toggleSelection = (li, list) => {
   let selected = list.querySelectorAll(".selected");
   for (let elem of selected) {
     elem.classList.remove("selected");
@@ -225,7 +225,7 @@ toggleSelection = (li, list) => {
   li.classList.add("selected");
 };
 
-createListItem = (file) => {
+let createListItem = (file) => {
   var li = document.createElement("LI");
   let div = document.createElement("div");
   div.classList.add("liParent");
@@ -249,42 +249,44 @@ createListItem = (file) => {
   li.appendChild(div);
   return li;
 };
-copyText = (t) => {
-  clipboard.writeText(t);
-};
 
-getSubject = (str) => {
+function copyText(t) {
+  clipboard.writeText(t);
+}
+
+function getSubject(str) {
   var start = str.indexOf("<title>") + "<title>".length;
   var end = str.lastIndexOf("</title>");
   var subject = str.slice(start, end);
   return subject;
-};
+}
 
-getClickedIndex = (list, node) => {
+function getClickedIndex(list, node) {
   var children = list.childNodes;
   for (var i = 0; i < children.length; i++) {
     const e = children[i];
-    if (node == e) break;
+    if (node == e)
+      break;
   }
   return i;
-};
+}
 
 async function readText(file) {
   var t = await file.text();
   return t;
 }
 
-const convertLinks = /<\s*a.*?href\s*=\s*(?:"|\')(.*?)(?:"|\')[^>]*>(.*?)<\s*?\/\s*?a\s*?>/g;
+const convertLinks = /<\s*a.*?href\s*=\s*(?:"|')(.*?)(?:"|')[^>]*>(.*?)<\s*?\/\s*?a\s*?>/g;
 const removeTags = /(<script(\s|\S)*?<\/script>)|(<style(\s|\S)*?<\/style>)|(<!--(\s|\S)*?-->)|(<\/?(\s|\S)*?>)/g;
 const removeWhiteSpace = /^\s+|\t+$/gm;
 
-createPlainText = (str) => {
+function createPlainText(str) {
   var pt = str.replace(convertLinks, "$2 [$1]");
   pt = pt.replace(removeTags, "");
   pt = pt.replace(removeWhiteSpace, "");
   pt = pt.replace(/\r/g, "\r\n");
   pt.trim();
   return pt;
-};
+}
 
 //#endregion

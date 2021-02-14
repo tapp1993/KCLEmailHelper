@@ -525,6 +525,10 @@ li:active {
     background-color: #A6BAAB;
 }
 
+.selected ~ p{
+    font-weight: bold;
+}
+
 
 /* Code
   –––––––––––––––––––––––––––––––––––––––––––––––––– */
