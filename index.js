@@ -112,11 +112,11 @@ document.addEventListener("dragover", (e) => {
   e.stopPropagation()
 });
 
-document.addEventListener("dragenter", (event) => {
+document.addEventListener("dragenter", () => {
   console.log("File is in the Drop Space");
 });
 
-document.addEventListener("dragleave", (event) => {
+document.addEventListener("dragleave", () => {
   console.log("File has left the Drop Space");
 });
 //#endregion
