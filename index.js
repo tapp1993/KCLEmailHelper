@@ -10,6 +10,8 @@ const copyNamesButton = document.getElementById("copyNamesButton");
 const copyHtmlButton = document.getElementById("copyHtmlButton");
 const copyPlainTextButton = document.getElementById("copyPlainTextButton");
 const previewButton = document.getElementById("previewButton");
+const copySubjectButton = document.getElementById("copySubjectButton");
+const copyNameButton = document.getElementById("copyNameButton");
 const overlay = document.getElementById("overlayContainer");
 
 var fileList
@@ -52,6 +54,8 @@ document.getElementById("file-list").addEventListener("click", function (e) {
     copyHtmlButton.removeAttribute("disabled");
     copyPlainTextButton.removeAttribute("disabled");
     previewButton.removeAttribute("disabled");
+    copySubjectButton.removeAttribute("disabled");
+    copyNameButton.removeAttribute("disabled");
 
     toggleSelection(li, list);
     console.log(f.name + " was clicked. Index: " + currentIndex);
@@ -74,6 +78,8 @@ document.getElementById("file-list").addEventListener("auxclick", function (e) {
       copyHtmlButton.setAttribute("disabled", true);
       copyPlainTextButton.setAttribute("disabled", true);
       previewButton.setAttribute("disabled", true);
+      copyNameButton.setAttribute("disabled", true);
+      copySubject.setAttribute("disabled", true);
     }
     console.log(f.name + " was deleted.");
     if (fileArray.length < 1) {
@@ -180,14 +186,29 @@ function copyPlainText() {
 }
 
 function copyHtml() {
+  var f = fileArray[currentIndex];
   copyText(fileHtml);
-  showPopup("Copied HTML");
+  showPopup(`Copied HTML for "${f.name.replace('.html', '')}"`);
+}
+
+function copyName() {
+  var n = fileArray[currentIndex].name.replace(".html", "");
+  copyText(n);
+  showPopup(`Copied "${n}"`);
+}
+
+async function copySubject() {
+  var f = fileArray[currentIndex];
+  var t = await readText(f);
+  var s = getSubject(t);
+  copyText(s);
+  showPopup(`Copied "${s}"`);
 }
 
 let copyHtmlShortcut = (f) => {
   readText(f).then((t) => {
     copyText(t);
-    showPopup("Copied HTML");
+    showPopup(`Copied HTML for "${f.name.replace('.html', '')}"`);
   });
 };
 //#endregion
@@ -220,7 +241,7 @@ let showPopup = (t) => {
   notification.classList.remove("hidden");
   setTimeout(() => {
     notification.classList.add("hidden");
-  }, 1500);
+  }, 2000);
 };
 
 let toggleSelection = (li, list) => {
